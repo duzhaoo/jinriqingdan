@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日清单</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>今日清单</h1>
+            <div class="date-selector">
+                <span>DATE</span>
+                <div class="weekdays">
+                    <span>一</span>
+                    <span>二</span>
+                    <span>三</span>
+                    <span>四</span>
+                    <span>五</span>
+                    <span>六</span>
+                    <span>日</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="time-slots">
+            <div class="time-row">
+                <div class="time-cell">6</div>
+                <div class="time-cell">7</div>
+                <div class="time-cell">8</div>
+                <div class="time-cell">9</div>
+                <div class="time-cell">10</div>
+                <div class="time-cell">11</div>
+                <div class="time-cell">12</div>
+                <div class="time-cell">13</div>
+                <div class="time-cell">14</div>
+                <div class="time-cell">15</div>
+                <div class="time-cell">16</div>
+                <div class="time-cell">17</div>
+                <div class="time-cell">18</div>
+            </div>
+            <div class="time-row">
+                <div class="time-cell">19</div>
+                <div class="time-cell">20</div>
+                <div class="time-cell">21</div>
+                <div class="time-cell">22</div>
+                <div class="time-cell">23</div>
+                <div class="time-cell">24</div>
+                <div class="time-cell">1</div>
+                <div class="time-cell">2</div>
+                <div class="time-cell">3</div>
+                <div class="time-cell">4</div>
+                <div class="time-cell">5</div>
+                <div class="time-cell">6</div>
+            </div>
+        </div>
+
+        <section class="time-summary">
+            <div class="summary-item">
+                <div class="circle brown">1</div>
+                <div class="summary-text">时间总预算</div>
+                <div class="summary-hours">小时</div>
+            </div>
+            <div class="summary-item">
+                <div class="circle brown">2</div>
+                <div class="summary-text">预算时间分配</div>
+                <div class="allocation">
+                    <div class="allocation-item">
+                        <span class="star-icon">★</span>
+                        <span>个人</span>
+                        <span class="hours-input">小时</span>
+                    </div>
+                    <div class="allocation-item">
+                        <span class="circle-icon">○</span>
+                        <span>工作</span>
+                        <span class="hours-input">小时</span>
+                    </div>
+                    <div class="allocation-item">
+                        <span class="triangle-icon">△</span>
+                        <span>家人/朋友</span>
+                        <span class="hours-input">小时</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="task-section">
+            <div class="section-header">
+                <div class="circle orange">1</div>
+                <div class="section-title" contenteditable="true">最重要的任务</div>
+            </div>
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div class="task-detail">
+                        <div class="task-description" contenteditable="true">预选择框</div>
+                        <div class="task-time">时间</div>
+                        <div class="task-duration">预计用时</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="task-section">
+            <div class="section-header">
+                <div class="circle orange">2</div>
+                <div class="section-title" contenteditable="true">三个中等任务</div>
+            </div>
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div class="task-detail">
+                        <div class="task-description" contenteditable="true">预选择框</div>
+                        <div class="task-time">时间</div>
+                        <div class="task-duration">预计用时</div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div class="task-detail">
+                        <div class="task-description" contenteditable="true">预选择框</div>
+                        <div class="task-time">时间</div>
+                        <div class="task-duration">预计用时</div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div class="task-detail">
+                        <div class="task-description" contenteditable="true">预选择框</div>
+                        <div class="task-time">时间</div>
+                        <div class="task-duration">预计用时</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="task-section">
+            <div class="section-header">
+                <div class="circle orange">3</div>
+                <div class="section-title" contenteditable="true">五个小型任务</div>
+            </div>
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div class="task-detail">
+                        <div class="task-description" contenteditable="true">预选择框</div>
+                        <div class="task-time">时间</div>
+                        <div class="task-duration">预计用时</div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div class="task-detail">
+                        <div class="task-description" contenteditable="true">预选择框</div>
+                        <div class="task-time">时间</div>
+                        <div class="task-duration">预计用时</div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div class="task-detail">
+                        <div class="task-description" contenteditable="true">预选择框</div>
+                        <div class="task-time">时间</div>
+                        <div class="task-duration">预计用时</div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div class="task-detail">
+                        <div class="task-description" contenteditable="true">预选择框</div>
+                        <div class="task-time">时间</div>
+                        <div class="task-duration">预计用时</div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox">
+                    <div class="task-detail">
+                        <div class="task-description" contenteditable="true">预选择框</div>
+                        <div class="task-time">时间</div>
+                        <div class="task-duration">预计用时</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="task-section">
+            <div class="section-header">
+                <div class="circle orange">4</div>
+                <div class="section-title" contenteditable="true">其他任务</div>
+            </div>
+            <div class="task-list other-tasks">
+                <!-- 这里是一个空白区域，用户可以填写其他任务 -->
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
