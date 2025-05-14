@@ -1,3 +1,212 @@
+// 显示VIP限制提示
+function showVIPLimitMessage(message) {
+    // 创建模态框容器
+    let modalContainer = document.getElementById('vipLimitModalContainer');
+    
+    if (!modalContainer) {
+        // 创建模态框容器
+        modalContainer = document.createElement('div');
+        modalContainer.id = 'vipLimitModalContainer';
+        modalContainer.style.position = 'fixed';
+        modalContainer.style.top = '0';
+        modalContainer.style.left = '0';
+        modalContainer.style.width = '100%';
+        modalContainer.style.height = '100%';
+        modalContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        modalContainer.style.zIndex = '1000';
+        modalContainer.style.display = 'flex';
+        modalContainer.style.justifyContent = 'center';
+        modalContainer.style.alignItems = 'center';
+        
+        document.body.appendChild(modalContainer);
+    } else {
+        modalContainer.style.display = 'flex';
+    }
+    
+    // 创建模态框内容
+    const modalContent = document.createElement('div');
+    modalContent.className = 'vip-limit-modal-content';
+    modalContent.style.backgroundColor = 'white';
+    modalContent.style.borderRadius = '10px';
+    modalContent.style.padding = '25px';
+    modalContent.style.width = '400px';
+    modalContent.style.maxWidth = '90%';
+    modalContent.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+    modalContent.style.position = 'relative';
+    
+    modalContent.innerHTML = `
+        <div style="position: relative;">
+            <button id="vipLimitCloseX" style="position: absolute; top: -10px; right: -10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #8c6e58; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s ease;">×</button>
+        </div>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <p style="color: #8c6e58; font-size: 18px; line-height: 1.5; font-weight: 500;">${message}</p>
+        </div>
+        
+        <div style="margin-bottom: 20px; padding: 20px; background-color: #f9f6f2; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+            <h3 style="color: #5a4a42; margin: 0 0 16px 0; font-size: 20px; font-weight: 600; text-align: center;">39元开通永久VIP</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="display: flex; align-items: center; padding: 8px; background-color: white; border-radius: 8px;">
+                    <div style="width: 28px; height: 28px; background: linear-gradient(45deg, #e6b980, #eacda3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 8px;">
+                        <span style="color: #8B4513; font-weight: bold;">∞</span>
+                    </div>
+                    <span style="color: #5a4a42; font-size: 14px;">无限创建日程</span>
+                </div>
+                <div style="display: flex; align-items: center; padding: 8px; background-color: white; border-radius: 8px;">
+                    <div style="width: 28px; height: 28px; background: linear-gradient(45deg, #e6b980, #eacda3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 8px;">
+                        <span style="color: #8B4513; font-weight: bold;">★</span>
+                    </div>
+                    <span style="color: #5a4a42; font-size: 14px;">永久免广告</span>
+                </div>
+                <div style="display: flex; align-items: center; padding: 8px; background-color: white; border-radius: 8px;">
+                    <div style="width: 28px; height: 28px; background: linear-gradient(45deg, #e6b980, #eacda3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 8px;">
+                        <span style="color: #8B4513; font-weight: bold;">↑</span>
+                    </div>
+                    <span style="color: #5a4a42; font-size: 14px;">优先获取新功能</span>
+                </div>
+                <div style="display: flex; align-items: center; padding: 8px; background-color: white; border-radius: 8px;">
+                    <div style="width: 28px; height: 28px; background: linear-gradient(45deg, #e6b980, #eacda3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 8px;">
+                        <span style="color: #8B4513; font-weight: bold;">♥</span>
+                    </div>
+                    <span style="color: #5a4a42; font-size: 14px;">专属客服支持</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px; padding: 15px; background-color: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div style="display: flex; margin-bottom: 10px;">
+                <input type="text" id="vipLimitActivationCode" placeholder="请输入激活码" style="flex: 1; padding: 10px 12px; border: 1px solid #e0d5c9; border-radius: 6px; font-size: 14px; margin-right: 10px; outline: none; transition: all 0.3s ease;">
+                <button id="vipLimitActivateBtn" style="background: linear-gradient(45deg, #e6b980, #eacda3); color: #8B4513; border: none; border-radius: 6px; padding: 10px 15px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">激活</button>
+            </div>
+            <p id="vipLimitActivationMessage" style="margin: 8px 0 0 0; font-size: 14px; color: #e8a87c; min-height: 20px; text-align: center;"></p>
+        </div>
+        
+        <div style="display: flex; justify-content: center; gap: 15px;">
+            <button id="vipLimitUpgradeBtn" style="background: linear-gradient(45deg, #e6b980, #eacda3); color: #8B4513; border: none; border-radius: 6px; padding: 12px 20px; cursor: pointer; font-size: 16px; flex: 1; font-weight: normal; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">购买VIP请加微信 duzhao0000</button>        
+        </div>
+    `;
+    
+    // 清空容器并添加新内容
+    modalContainer.innerHTML = '';
+    modalContainer.appendChild(modalContent);
+    
+    // 添加升级VIP按钮事件
+    document.getElementById('vipLimitUpgradeBtn').addEventListener('click', function() {
+        modalContainer.style.display = 'none';
+        if (window.showVIPModal) {
+            window.showVIPModal();
+        }
+    });
+    
+    // 添加激活按钮事件
+    document.getElementById('vipLimitActivateBtn').addEventListener('click', async function() {
+        const codeInput = document.getElementById('vipLimitActivationCode');
+        const messageElement = document.getElementById('vipLimitActivationMessage');
+        const activateButton = document.getElementById('vipLimitActivateBtn');
+        
+        if (!codeInput.value.trim()) {
+            messageElement.textContent = '请输入激活码';
+            messageElement.style.color = '#e74c3c';
+            codeInput.focus();
+            codeInput.style.borderColor = '#e74c3c';
+            codeInput.style.boxShadow = '0 0 0 2px rgba(231, 76, 60, 0.2)';
+            setTimeout(() => {
+                codeInput.style.borderColor = '#e0d5c9';
+                codeInput.style.boxShadow = 'none';
+            }, 2000);
+            return;
+        }
+        
+        try {
+            // 显示加载状态
+            const originalText = activateButton.textContent;
+            activateButton.textContent = '激活中...';
+            activateButton.disabled = true;
+            activateButton.style.opacity = '0.7';
+            
+            if (window.VIPManager) {
+                const result = await window.VIPManager.activateVIP(codeInput.value.trim());
+                
+                if (result.success) {
+                    messageElement.textContent = result.message;
+                    messageElement.style.color = '#4CAF50';
+                    activateButton.textContent = '激活成功';
+                    activateButton.style.backgroundColor = '#4CAF50';
+                    
+                    // 清空输入框
+                    codeInput.value = '';
+                    
+                    // 关闭当前模态框
+                    setTimeout(() => {
+                        modalContainer.style.display = 'none';
+                    }, 1500);
+                } else {
+                    messageElement.textContent = result.message;
+                    messageElement.style.color = '#e74c3c';
+                    
+                    // 错误动画
+                    codeInput.style.borderColor = '#e74c3c';
+                    codeInput.style.boxShadow = '0 0 0 2px rgba(231, 76, 60, 0.2)';
+                    setTimeout(() => {
+                        codeInput.style.borderColor = '#e0d5c9';
+                        codeInput.style.boxShadow = 'none';
+                    }, 2000);
+                    
+                    // 恢复按钮状态
+                    activateButton.textContent = originalText;
+                    activateButton.disabled = false;
+                    activateButton.style.opacity = '1';
+                }
+            } else {
+                messageElement.textContent = 'VIP功能不可用';
+                messageElement.style.color = '#e74c3c';
+                
+                // 恢复按钮状态
+                activateButton.textContent = originalText;
+                activateButton.disabled = false;
+                activateButton.style.opacity = '1';
+            }
+        } catch (error) {
+            messageElement.textContent = error.message || '激活失败，请稍后重试';
+            messageElement.style.color = '#e74c3c';
+            
+            // 恢复按钮状态
+            activateButton.textContent = '激活';
+            activateButton.disabled = false;
+            activateButton.style.opacity = '1';
+        }
+    });
+    
+    // 添加右上角关闭按钮事件
+    document.getElementById('vipLimitCloseX').addEventListener('click', function() {
+        modalContainer.style.display = 'none';
+    });
+    
+    // 添加关闭按钮事件 - 返回到上一个日期
+    const closeBtn = document.getElementById('vipLimitCloseBtn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            modalContainer.style.display = 'none';
+            // 如果有日期选择器，尝试返回到上一个日期
+            const dateSelector = document.getElementById('dateSelector');
+            if (dateSelector && currentDate) {
+                // 返回到上一个日期
+                const prevDate = getPreviousDate(currentDate);
+                dateSelector.value = prevDate;
+                // 触发change事件
+                const event = new Event('change');
+                dateSelector.dispatchEvent(event);
+            }
+        });
+    }
+}
+
+// 获取前一天的日期
+function getPreviousDate(dateString) {
+    const date = new Date(dateString);
+    date.setDate(date.getDate() - 1);
+    return date.toISOString().split('T')[0];
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // 获取当前日期并设置
     setCurrentDate();
@@ -173,8 +382,18 @@ function formatDateForDisplay(dateString) {
 }
 
 // 加载指定日期的数据
-function loadDataForDate(date) {
+async function loadDataForDate(date) {
     console.log('加载日期数据:', date);
+    
+    // 检查VIP限制
+    if (window.VIPManager) {
+        const checkResult = await window.VIPManager.checkDateLimit(date);
+        if (!checkResult.allowed) {
+            // 显示限制提示
+            showVIPLimitMessage(checkResult.message);
+            return;
+        }
+    }
     
     // 添加过渡动画效果
     const container = document.querySelector('.container');
@@ -227,24 +446,26 @@ function loadDataForDate(date) {
     
     // 已经清除过了，不需要重复清除
     
-    // 尝试从本地存储加载指定日期的数据
+    // 尝试从 Chrome Storage 加载指定日期的数据
     try {
-        const savedData = localStorage.getItem('todayTodoData_' + date);
-        console.log('从本地存储加载数据:', savedData ? '有数据' : '无数据');
-        
-        if (savedData) {
-            const data = JSON.parse(savedData);
-            // 更新全局缓存
-            currentDateData = data;
-            // 加载数据到页面
-            loadDataFromObject(data);
-        } else {
-            // 如果没有数据，初始化默认值
-            setupTimeSlots();
-            setupAllocationGroups();
-            // 创建并缓存默认数据
-            currentDateData = collectPageData();
-        }
+        const key = 'todayTodoData_' + date;
+        chrome.storage.local.get(key, function(result) {
+            console.log('从 Chrome Storage 加载数据:', result[key] ? '有数据' : '无数据');
+            
+            if (result[key]) {
+                const data = result[key];
+                // 更新全局缓存
+                currentDateData = data;
+                // 加载数据到页面
+                loadDataFromObject(data);
+            } else {
+                // 如果没有数据，初始化默认值
+                setupTimeSlots();
+                setupAllocationGroups();
+                // 创建并缓存默认数据
+                currentDateData = collectPageData();
+            }
+        });
     } catch (e) {
         console.error('加载数据错误:', e);
         // 如果加载出错，初始化默认值
@@ -579,18 +800,8 @@ function setupTaskInputs() {
         });
     }
     
-    // 为任务部分的标题添加可编辑功能
-    const sectionTitles = document.querySelectorAll('.section-title');
-    sectionTitles.forEach(title => {
-        title.contentEditable = true;
-        title.addEventListener('blur', saveToLocalStorage);
-        title.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                this.blur();
-            }
-        });
-    });
+    // 任务部分的标题不可编辑
+    // 移除了标题的可编辑功能
 }
 
 // 设置复选框事件
@@ -616,7 +827,7 @@ function setupCheckboxes() {
 let currentDateData = null;
 let currentDate = null;
 
-// 保存到本地存储
+// 保存到Chrome存储
 function saveToLocalStorage(specificDate) {
     // 收集当前页面数据
     const data = collectPageData();
@@ -640,8 +851,13 @@ function saveToLocalStorage(specificDate) {
     
     // 按日期保存数据
     try {
-        localStorage.setItem('todayTodoData_' + saveDate, JSON.stringify(data));
-        console.log('数据已保存到日期:', saveDate);
+        const key = 'todayTodoData_' + saveDate;
+        const saveObj = {};
+        saveObj[key] = data;
+        
+        chrome.storage.local.set(saveObj, function() {
+            console.log('数据已保存到日期:', saveDate);
+        });
     } catch (e) {
         console.error('保存数据失败:', e);
     }
@@ -736,7 +952,7 @@ function collectPageData() {
 }
 
 // 从本地存储加载
-function loadFromLocalStorage() {
+async function loadFromLocalStorage() {
     // 获取当前选中的日期
     const dateSelector = document.getElementById('dateSelector');
     const selectedDate = dateSelector ? dateSelector.value : new Date().toISOString().split('T')[0];
@@ -745,7 +961,7 @@ function loadFromLocalStorage() {
     currentDate = selectedDate;
     
     // 直接调用加载指定日期的数据函数
-    loadDataForDate(selectedDate);
+    await loadDataForDate(selectedDate);
 }
 
 

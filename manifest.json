@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "今日清单",
+  "version": "1.0",
+  "description": "简洁高效的日程管理工具，帮助您规划每日任务",
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/icon128.png",
+      "48": "images/icon128.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ]
+}

@@ -6,6 +6,65 @@
     <title>今日清单</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            height: 100vh;
+            box-sizing: border-box;
+            background-color: #f9f3e9;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            height: auto;
+            min-height: 80vh;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0d5c9;
+            max-width: 900px;
+            margin: 0 auto 20px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            color: #5a4a42;
+            margin: 0;
+        }
+        
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #5a4a42;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .close-button:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-header {
+                padding: 0 10px 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -55,7 +114,7 @@
                 <div class="circle brown">1</div>
                 <div class="summary-text">时间总预算</div>
                 <div class="total-hours-container">
-                    <div class="summary-hours">1小时</div>
+                    <div class="summary-hours"><span class="hours-number" contenteditable="true">8</span>小时</div>
                 </div>
             </div>
             
@@ -63,20 +122,22 @@
                 <div class="circle brown">2</div>
                 <div class="summary-text" contenteditable="true">预算时间分配</div>
                 <div class="allocation-groups-container">
-                    <div class="allocation-group" data-type="personal">
-                        <span class="star-icon">★</span>
-                        <span>个人</span>
-                        <span class="hours-input">0小时</span>
-                    </div>
-                    <div class="allocation-group" data-type="work">
-                        <span class="circle-icon">○</span>
-                        <span>工作</span>
-                        <span class="hours-input">0小时</span>
-                    </div>
-                    <div class="allocation-group" data-type="family">
-                        <span class="triangle-icon">△</span>
-                        <span>家人/朋友</span>
-                        <span class="hours-input">0小时</span>
+                    <div class="allocation-groups-wrapper">
+                        <div class="allocation-group" data-type="personal">
+                            <span class="star-icon">★</span>
+                            <span>个人</span>
+                            <span class="hours-input"><span class="hours-number" contenteditable="true">3</span>小时</span>
+                        </div>
+                        <div class="allocation-group" data-type="work">
+                            <span class="circle-icon">○</span>
+                            <span>工作</span>
+                            <span class="hours-input"><span class="hours-number" contenteditable="true">5</span>小时</span>
+                        </div>
+                        <div class="allocation-group" data-type="family">
+                            <span class="triangle-icon">△</span>
+                            <span>家人/朋友</span>
+                            <span class="hours-input"><span class="hours-number" contenteditable="true">2</span>小时</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,7 +146,7 @@
         <section class="task-section">
             <div class="section-header">
                 <div class="circle orange">1</div>
-                <div class="section-title" contenteditable="true">最重要的任务</div>
+                <div class="section-title">最重要的任务</div>
                 <button class="add-task-btn" data-section="important"><i class="fas fa-plus"></i></button>
             </div>
             <div class="task-list" id="important-tasks">
@@ -96,7 +157,7 @@
         <section class="task-section">
             <div class="section-header">
                 <div class="circle orange">2</div>
-                <div class="section-title" contenteditable="true">三个中等任务</div>
+                <div class="section-title">三个中等任务</div>
                 <button class="add-task-btn" data-section="medium"><i class="fas fa-plus"></i></button>
             </div>
             <div class="task-list" id="medium-tasks">
@@ -107,7 +168,7 @@
         <section class="task-section">
             <div class="section-header">
                 <div class="circle orange">3</div>
-                <div class="section-title" contenteditable="true">五个小型任务</div>
+                <div class="section-title">五个小型任务</div>
                 <button class="add-task-btn" data-section="small"><i class="fas fa-plus"></i></button>
             </div>
             <div class="task-list" id="small-tasks">
@@ -118,7 +179,7 @@
         <section class="task-section">
             <div class="section-header">
                 <div class="circle orange">4</div>
-                <div class="section-title" contenteditable="true">其他任务</div>
+                <div class="section-title">其他任务</div>
                 <button class="add-task-btn" data-section="other"><i class="fas fa-plus"></i></button>
             </div>
             <div class="task-list" id="other-tasks">
@@ -128,5 +189,8 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="fullscreen.js"></script>
+    <script src="vip.js"></script>
+    <script src="settings.js"></script>
 </body>
 </html>
